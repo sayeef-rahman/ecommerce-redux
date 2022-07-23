@@ -1,0 +1,10 @@
+/* Footer position at the bottom of the display */
+#footer {
+    position: fixed;
+    bottom: 0;
+}
+
+.footer-background-color{
+    margin-top: 50px;
+    background-color: rgb(219, 219, 219);
+  }
