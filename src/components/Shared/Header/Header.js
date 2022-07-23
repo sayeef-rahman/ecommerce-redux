@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Navbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Routes, Route, Link } from "react-router-dom";
 
 import './Header.css'
 
@@ -34,10 +35,10 @@ const Header = () => {
             Online Shop
           </Navbar.Brand>
           <div>
-            <Navbar.Brand href='#home'>Home</Navbar.Brand>
-            <Navbar.Brand href='#home'>Shop</Navbar.Brand>
-            <Navbar.Brand href='#home'>Men</Navbar.Brand>
-            <Navbar.Brand href='#home'>Women</Navbar.Brand>
+            <Navbar.Brand ><Link to="/">Home</Link></Navbar.Brand>
+            <Navbar.Brand href='#shop'>Shop</Navbar.Brand>
+            <Navbar.Brand href='#men'>Men</Navbar.Brand>
+            <Navbar.Brand href='#women'>Women</Navbar.Brand>
             {/* Cart Logo */}
             <Navbar.Brand onClick={() => showCart()}>
               <FontAwesomeIcon icon={faShoppingCart} />
@@ -46,11 +47,15 @@ const Header = () => {
               </span>
             </Navbar.Brand>
             {/* User Profile */}
-            <Navbar.Brand onClick={() => showUser()}>
+            {/* <Navbar.Brand onClick={() => showUser()}>
               <FontAwesomeIcon icon={faUser} />
               <span className='badge badge-warning' id='lblCartCount'>
               </span>
-            </Navbar.Brand>
+            </Navbar.Brand> */}
+
+            {/* Login Button */}
+            <Navbar.Brand><Link to="/login">Login</Link></Navbar.Brand>
+
             
           </div>
         </Container>
