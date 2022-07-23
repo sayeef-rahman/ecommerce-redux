@@ -3,10 +3,22 @@ import { Container, Navbar } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Routes, Route, Link } from "react-router-dom";
-
 import './Header.css'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import { signOut } from 'firebase/auth';
+
 
 const Header = () => {
+
+  //Logged in User
+  const [user] = useAuthState(auth);
+  if(user){
+    console.log(user.photoURL);
+  }
+  else{
+    console.log('No user found')
+  }
      //Cart items
   //const cart = useSelector((state) => state.cart);
   // console.log('Header Products:', cart);
@@ -16,10 +28,10 @@ const Header = () => {
     setCartVisibility(!cartVisibility);
   };
 
-  //Show User Information
-  const showUser = () =>{
-    console.log('user clicked');
-  }
+  // User Logout
+  const logout = () => {
+    signOut(auth);
+  };
     return (
         <>
       <Navbar bg='dark' variant='dark'>
@@ -47,14 +59,16 @@ const Header = () => {
               </span>
             </Navbar.Brand>
             {/* User Profile */}
-            {/* <Navbar.Brand onClick={() => showUser()}>
-              <FontAwesomeIcon icon={faUser} />
-              <span className='badge badge-warning' id='lblCartCount'>
-              </span>
-            </Navbar.Brand> */}
+            <Navbar.Brand>
+              {
+                user?<img src={user.photoURL} alt="user profile photo" className='' style={{width:"30px"}}/>:<FontAwesomeIcon icon={faUser} />
+              }
+              {/* <span className='badge badge-warning' id='lblCartCount'>
+              </span> */}
+            </Navbar.Brand>
 
             {/* Login Button */}
-            <Navbar.Brand><Link to="/login">Login</Link></Navbar.Brand>
+            <Navbar.Brand>{user? <button className="" onClick={logout} >Sign Out</button> : <Link to="/login">Login</Link>}</Navbar.Brand>
 
             
           </div>
